@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Truffle
+build/
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log

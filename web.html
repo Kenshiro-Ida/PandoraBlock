@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PandoraBlockchain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="/" class="flex items-center">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap">PandoraBlockchain</span>
+        </a>
+        <div class="hidden md:flex md:items-center md:space-x-4">
+            <button id="registerBtn" class="px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">Register Product</button>
+            <button id="verifyBtn" class="px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">Verify Product</button>
+            <button id="transferBtn" class="px-3 py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">Transfer Product</button>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Verify Section -->
+        <div id="verifySection" class="max-w-2xl mx-auto">
+            <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h2 class="text-2xl font-bold mb-6">Verify Product</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="verifyProductId">
+                        Product ID
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="verifyProductId" type="text">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="verifySerialNumber">
+                        Serial Number
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="verifySerialNumber" type="text">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button id="verifySubmit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Verify
+                    </button>
+                </div>
+            </div>
+            <div id="verificationResults" class="hidden bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h3 class="text-xl font-bold mb-4">Verification Results</h3>
+                <div id="productInfo" class="mb-6"></div>
+                <div id="transferHistory" class="mb-6"></div>
+            </div>
+        </div>
+
+        <!-- Register Section -->
+        <div id="registerSection" class="max-w-2xl mx-auto hidden">
+            <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h2 class="text-2xl font-bold mb-6">Register New Product</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="productId">
+                            Product ID
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="productId" type="text">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="manufacturer">
+                            Manufacturer
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manufacturer" type="text">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="batchNumber">
+                            Batch Number
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="batchNumber" type="text">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="serialNumber">
+                            Serial Number
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="serialNumber" type="text">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="manufactureDate">
+                            Manufacture Date
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="manufactureDate" type="date">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="expiryDate">
+                            Expiry Date
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="expiryDate" type="date">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="gtin">
+                        GTIN
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gtin" type="text">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button id="registerSubmit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Register Product
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transfer Section -->
+        <div id="transferSection" class="max-w-2xl mx-auto hidden">
+            <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <h2 class="text-2xl font-bold mb-6">Transfer Product</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="transferProductId">
+                        Product ID
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transferProductId" type="text">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="transferSerialNumber">
+                        Serial Number
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transferSerialNumber" type="text">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="senderAddress">
+                        Sender Address
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="senderAddress" type="text">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="privateKey">
+                        Private Key
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="privateKey" type="password">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="newOwner">
+                        New Owner Address
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="newOwner" type="text">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="transferType">
+                        Transfer Type
+                    </label>
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transferType">
+                        <option value="">Select Transfer Type</option>
+                        <option value="MANUFACTURER_TO_DISTRIBUTOR">Manufacturer to Distributor</option>
+                        <option value="DISTRIBUTOR_TO_WHOLESALER">Distributor to Wholesaler</option>
+                        <option value="WHOLESALER_TO_PHARMACY">Wholesaler to Pharmacy</option>
+                        <option value="DISTRIBUTOR_TO_HOSPITAL">Distributor to Hospital</option>
+                        <option value="DISTRIBUTOR_TO_PHARMACY">Distributor to Pharmacy</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button id="transferSubmit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Transfer Product
+                    </button>
+                </div>
+                <div id="transferStatus" class="mt-4 hidden">
+                    <div class="bg-gray-100 border-l-4 border-blue-500 text-blue-700 p-4" role="alert">
+                        <p class="font-bold">Processing Transfer</p>
+                        <p>Please wait while the transaction is being processed...</p>
+                    </div>
+                </div>
+                <div id="transferError" class="mt-4 hidden">
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+                        <p class="font-bold">Error</p>
+                        <p id="transferErrorMessage"></p>
+                    </div>
+                </div>
+                <div id="transferSuccess" class="mt-4 hidden">
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+                        <p class="font-bold">Success!</p>
+                        <p>Product has been successfully transferred.</p>
+                        <p>Transaction Hash: <span id="transferTxHash" class="font-mono"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000';
+
+        // Navigation
+        document.getElementById('registerBtn').addEventListener('click', () => {
+            document.getElementById('registerSection').classList.remove('hidden');
+            document.getElementById('verifySection').classList.add('hidden');
+            document.getElementById('transferSection').classList.add('hidden');
+        });
+
+        document.getElementById('verifyBtn').addEventListener('click', () => {
+            document.getElementById('registerSection').classList.add('hidden');
+            document.getElementById('verifySection').classList.remove('hidden');
+            document.getElementById('transferSection').classList.add('hidden');
+        });
+
+        document.getElementById('transferBtn').addEventListener('click', () => {
+            document.getElementById('registerSection').classList.add('hidden');
+            document.getElementById('verifySection').classList.add('hidden');
+            document.getElementById('transferSection').classList.remove('hidden');
+        });
+
+        // Register Product
+        document.getElementById('registerSubmit').addEventListener('click', async () => {
+            const productData = {
+                product_id: document.getElementById('productId').value,
+                manufacturer: document.getElementById('manufacturer').value,
+                batch_number: document.getElementById('batchNumber').value,
+                manufacture_date: document.getElementById('manufactureDate').value,
+                expiry_date: document.getElementById('expiryDate').value,
+                gtin: document.getElementById('gtin').value,
+                serial_number: document.getElementById('serialNumber').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/product/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(productData)
+                });
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert(`Product registered successfully!\nTransaction Hash: ${result.transaction_hash}`);
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        });
+
+        // Verify Product
+        document.getElementById('verifySubmit').addEventListener('click', async () => {
+            const productId = document.getElementById('verifyProductId').value;
+            const serialNumber = document.getElementById('verifySerialNumber').value;
+
+            try {
+                const response = await fetch(`${API_URL}/product/verify/${productId}/${serialNumber}`);
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    const productInfo = document.getElementById('productInfo');
+                    const transferHistory = document.getElementById('transferHistory');
+
+                    // Display product information
+                    productInfo.innerHTML = `
+                        <h4 class="font-bold mb-2">Product Information</h4>
+                        <p><strong>Product ID:</strong> ${result.product_info.product_id}</p>
+                        <p><strong>Manufacturer:</strong> ${result.product_info.manufacturer}
+                        <p><strong>Batch Number:</strong> ${result.product_info.batch_number}</p>
+                        <p><strong>Manufacture Date:</strong> ${new Date(result.product_info.manufacture_date).toLocaleDateString()}</p>
+                        <p><strong>Expiry Date:</strong> ${new Date(result.product_info.expiry_date).toLocaleDateString()}</p>
+                        <p><strong>Current Owner:</strong> ${result.product_info.current_owner}</p>
+                        <p><strong>GTIN:</strong> ${result.product_info.gtin}</p>
+                        <p><strong>Serial Number:</strong> ${result.product_info.serial_number}</p>
+                    `;
+
+                    // Display transfer history
+                    let transferHistoryHTML = '<h4 class="font-bold mb-2">Transfer History</h4>';
+                    if (result.transfer_history.length > 0) {
+                        transferHistoryHTML += '<ul class="list-disc pl-5">';
+                        result.transfer_history.forEach(transfer => {
+                            transferHistoryHTML += `
+                                <li class="mb-2">
+                                    <p><strong>From:</strong> ${transfer.from}</p>
+                                    <p><strong>To:</strong> ${transfer.to}</p>
+                                    <p><strong>Date:</strong> ${new Date(transfer.timestamp).toLocaleString()}</p>
+                                    <p><strong>Type:</strong> ${transfer.transfer_type}</p>
+                                </li>
+                            `;
+                        });
+                        transferHistoryHTML += '</ul>';
+                    } else {
+                        transferHistoryHTML += '<p>No transfer history available.</p>';
+                    }
+                    transferHistory.innerHTML = transferHistoryHTML;
+
+                    // Show results section
+                    document.getElementById('verificationResults').classList.remove('hidden');
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        });
+
+        // Transfer Product
+        document.getElementById('transferSubmit').addEventListener('click', async () => {
+            // Hide previous status messages
+            document.getElementById('transferStatus').classList.remove('hidden');
+            document.getElementById('transferError').classList.add('hidden');
+            document.getElementById('transferSuccess').classList.add('hidden');
+
+            const transferData = {
+                product_id: document.getElementById('transferProductId').value,
+                serial_number: document.getElementById('transferSerialNumber').value,
+                sender_address: document.getElementById('senderAddress').value,
+                private_key: document.getElementById('privateKey').value,
+                new_owner: document.getElementById('newOwner').value,
+                transfer_type: document.getElementById('transferType').value
+            };
+
+            // Validate required fields
+            const requiredFields = ['product_id', 'serial_number', 'sender_address', 'private_key', 'new_owner', 'transfer_type'];
+            const missingFields = requiredFields.filter(field => !transferData[field]);
+            
+            if (missingFields.length > 0) {
+                document.getElementById('transferStatus').classList.add('hidden');
+                document.getElementById('transferError').classList.remove('hidden');
+                document.getElementById('transferErrorMessage').textContent = `Please fill in all required fields: ${missingFields.join(', ')}`;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/product/transfer`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(transferData)
+                });
+
+                const result = await response.json();
+
+                // Hide processing status
+                document.getElementById('transferStatus').classList.add('hidden');
+
+                if (result.status === 'success') {
+                    // Show success message
+                    document.getElementById('transferSuccess').classList.remove('hidden');
+                    document.getElementById('transferTxHash').textContent = result.transaction_hash;
+                    
+                    // Clear form
+                    document.getElementById('transferProductId').value = '';
+                    document.getElementById('transferSerialNumber').value = '';
+                    document.getElementById('senderAddress').value = '';
+                    document.getElementById('privateKey').value = '';
+                    document.getElementById('newOwner').value = '';
+                    document.getElementById('transferType').value = '';
+                } else {
+                    // Show error message
+                    document.getElementById('transferError').classList.remove('hidden');
+                    document.getElementById('transferErrorMessage').textContent = result.message;
+                }
+            } catch (error) {
+                // Hide processing status and show error
+                document.getElementById('transferStatus').classList.add('hidden');
+                document.getElementById('transferError').classList.remove('hidden');
+                document.getElementById('transferErrorMessage').textContent = `Error: ${error.message}`;
+            }
+        });
+
+        // Helper function to show/hide sections
+        function showSection(sectionId) {
+            ['registerSection', 'verifySection', 'transferSection'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Helper function to format date strings
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+    </script>
+</body>
+</html>
